@@ -27,7 +27,7 @@ jobs:
         run: echo "CORES=$env:NUMBER_OF_PROCESSORS" >> $env:GITHUB_ENV
 
       - name: Checkout Repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Check robocopy path
         run: where robocopy
