@@ -640,7 +640,7 @@ bool StringEncryption::processConstantStringUse(Function *F) {
               if (DecryptedGV.count(GV) > 0) {
                 Inst.replaceUsesOfWith(GV, User->DecGV);
               } else {
-                
+
                 IRBuilder<> IRB(Inst.isEHPad() ? &*Inst.getParent()->getPrevNode()->getFirstInsertionPt() : &Inst);
                 fixEH(IRB.CreateCall(User->InitFunc, {User->DecGV}));
                 Inst.replaceUsesOfWith(GV, User->DecGV);
@@ -654,7 +654,7 @@ bool StringEncryption::processConstantStringUse(Function *F) {
                 Inst.replaceUsesOfWith(GV, Entry->DecGV);
               } else {
                 IRBuilder<> IRB(Inst.isEHPad() ? &*Inst.getParent()->getPrevNode()->getFirstInsertionPt() : &Inst);
-                
+
                 Value *OutBuf = IRB.CreateBitCast(Entry->DecGV,
                                                   PointerType::getUnqual(Ctx));
                 Value *Data = IRB.CreateInBoundsGEP(

@@ -222,7 +222,7 @@ void createPageTable(const CreatePageTableArgs &args) {
     auto GVNameObjects(args.GVNamePrefix + "_objects");
     auto ATy = ArrayType::get(GVObjects[0]->getType(), GVObjects.size());
     auto CA = ConstantArray::get(ATy, ArrayRef(GVObjects));
-    auto GV = new GlobalVariable(*args.M, ATy, false, 
+    auto GV = new GlobalVariable(*args.M, ATy, false,
                                  GlobalValue::LinkageTypes::InternalLinkage,
                                  CA, GVNameObjects);
     GV->addMetadata("noobf", *MDNode::get(args.M->getContext(), {}));
@@ -316,7 +316,7 @@ Value * buildPageTableDecryptIR(const BuildDecryptArgs &args) {
   Value *NextIndex = args.NextIndexValue;
   if (!NextIndex) {
     auto GVInitIndex = new GlobalVariable(*M, Int32Ty, false, GlobalValue::PrivateLinkage,
-      ConstantInt::get(Int32Ty, args.NextIndex), 
+      ConstantInt::get(Int32Ty, args.NextIndex),
       M->getName() + args.Fn->getName() + "_InitIndex" +
       std::to_string(args.NextIndex));
     GVInitIndex->addMetadata("noobf", *MDNode::get(Ctx, {}));
@@ -439,7 +439,7 @@ Value * encryptConstant(Constant *plainConstant, Instruction *insertBefore, Cryp
   if (BitWidth < 8) {
     return plainConstant;
   }
-  
+
   const auto Key = ConstantInt::get(
       IntegerType::get(Ctx, BitWidth),
       randomEngine->get_uint64_t());
