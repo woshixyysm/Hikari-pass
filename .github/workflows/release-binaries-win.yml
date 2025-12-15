@@ -113,7 +113,7 @@ jobs:
           cmake --build build --config ${{ env.BUILD_TYPE }} --target install --verbose -j ${{ env.CORES }}
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ollvm-files
           path: install/
