@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    timeout-minutes: 150
+    timeout-minutes: 250
 
     runs-on: windows-latest
 
